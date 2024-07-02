@@ -5,6 +5,7 @@ import 'package:authentication_blogs/features/auth/presentation/bloc/auth_bloc.d
 import 'package:authentication_blogs/features/auth/presentation/pages/login_page.dart';
 import 'package:authentication_blogs/features/auth/presentation/widgets/auth_field.dart';
 import 'package:authentication_blogs/features/auth/presentation/widgets/auth_gradient_button.dart';
+import 'package:authentication_blogs/features/blog/presentation/pages/blog_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,6 +46,9 @@ class _SignupPageState extends State<SignupPage> {
           builder: (context, state) {
             if (state is AuthLoading) {
               return const Loader();
+            } else if (state is AuthSuccess) {
+              Navigator.pushAndRemoveUntil(
+                  context, BlogPage.route(), (route) => false);
             }
             return Form(
               key: formKey,
